@@ -149,6 +149,12 @@ async function iniciarBot() {
   const sock = makeWASocket({
     auth: state,
     logger: pino({ level: 'silent' }),
+    browser: ['Cozil Bot', 'Chrome', '1.0.0'],
+    connectTimeoutMs: 60000,
+    defaultQueryTimeoutMs: 60000,
+    keepAliveIntervalMs: 30000,
+    markOnlineOnConnect: true,
+    syncFullHistory: false,
   });
 
   sock.ev.on('creds.update', saveCreds);

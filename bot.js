@@ -9,6 +9,7 @@ const qrcode = require('qrcode-terminal');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
 // Configuração
 const SHEET_ID = '15K5WzKZYYKzjurApRX2aAepMcRqrpanj8a4oyp56rW4';
@@ -147,7 +148,6 @@ async function iniciarBot() {
 
   const sock = makeWASocket({
     auth: state,
-    printQRInTerminal: true,
     logger: pino({ level: 'silent' }),
   });
 
@@ -159,6 +159,7 @@ async function iniciarBot() {
     if (qr) {
       console.log('\n📱 Escaneie o QR Code abaixo com seu WhatsApp:\n');
       qrcode.generate(qr, { small: true });
+      console.log('\n');
     }
 
     if (connection === 'close') {
@@ -212,6 +213,17 @@ async function iniciarBot() {
     }
   });
 }
+
+// Cria servidor HTTP simples para o Render não reclamar
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot WhatsApp Cozil está rodando!');
+});
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`🌐 Servidor HTTP rodando na porta ${PORT}`);
+});
 
 // Inicia o bot
 console.log('🚀 Iniciando bot WhatsApp...');

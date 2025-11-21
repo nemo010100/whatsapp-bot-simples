@@ -1,0 +1,22 @@
+{
+  "name": "cozil-whatsapp-bot-simples",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp simples para consulta de produtos Cozil",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "keywords": ["whatsapp", "bot", "cozil"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.0",
+    "qrcode-terminal": "^0.12.0",
+    "pino": "^8.16.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
